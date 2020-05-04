@@ -42,9 +42,11 @@ export default {
   data() {
     return {
       teksti: {
+        id: null,
         teksti: "",
         teema_id: ""
-      }
+      },
+      submitted: false
     };
   },
   methods: {
@@ -56,7 +58,9 @@ export default {
 
       TekstiDataService.create(data)
         .then(response => {
+          this.teksti.id = response.data.id;
           console.log(response.data);
+          this.submitted = true;
         })
         .catch(e => {
           console.log(e);
@@ -64,6 +68,7 @@ export default {
     },
     
     uusiTeksti() {
+      this.submitted = false;
       this.teksti = {};
     }
   }
