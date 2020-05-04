@@ -69,7 +69,7 @@ export default {
         });
     },
 
-    deleteTutorial() {
+    deleteTeksti() {
       TekstiDataService.delete(this.currentTeksti.id)
         .then(response => {
           console.log(response.data);
