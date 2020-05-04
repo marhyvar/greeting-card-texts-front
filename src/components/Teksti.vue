@@ -50,8 +50,8 @@ export default {
     getTeksti(id) {
       TekstiDataService.get(id)
         .then(response => {
-          this.currentTeksti = response.data;
-          console.log(response.data);
+          this.currentTeksti = response.data[0];
+          console.log('teksti: ', response.data[0]);
         })
         .catch(e => {
           console.log(e);
@@ -83,6 +83,7 @@ export default {
   mounted() {
     this.viesti = '';
     this.getTeksti(this.$route.params.id);
+    console.log('id: ', this.$route.params.id)
   }
 };
 </script>
