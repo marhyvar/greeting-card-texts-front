@@ -3,16 +3,16 @@
     <div v-if="!submitted">
       <div class="form-group">
         <label for="teksti">Teksti</label>
-        <input
-          type="text"
+        <textarea
           class="form-control"
+          rows="5"
           id="teksti"
           required
           v-model="teksti.teksti"
           name="teksti"
         />
       </div>
-
+      <!--
       <div class="form-group">
         <label for="teema_id">Teema-id</label>
         <input
@@ -22,7 +22,17 @@
           v-model="teksti.teema_id"
           name="teema_id"
         />
-      </div>
+      </div> 
+      -->
+      <div class="form-group">
+        <label for="select2">Valitse teema: </label>
+        <select class="form-control" id="select2" v-model.number="teksti.teema_id">
+          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+      </div> 
+      
 
       <button @click="saveTeksti" class="btn btn-success">Tallenna</button>
     </div>
@@ -43,9 +53,11 @@ export default {
     return {
       teksti: {
         id: null,
-        teksti: "",
-        teema_id: ""
+        teksti: "",  
+        teema_id: ""     
       },
+      teemat: [],
+      options: [ { text: 'joulu', value: 1 }],
       submitted: false
     };
   },
@@ -55,7 +67,6 @@ export default {
         teksti: this.teksti.teksti,
         teema_id: this.teksti.teema_id
       };
-
       TekstiDataService.create(data)
         .then(response => {
           this.teksti.id = response.data.id;
@@ -66,11 +77,32 @@ export default {
           console.log(e);
         });
     },
+
+    haeTeemat() {
+      TekstiDataService.getTeemat()
+        .then(response => {
+          this.teemat = response.data;
+          console.log("Teemat: ", response.data);
+          let res = this.teemat.map(t => {
+            let obj = {};
+            obj['text'] = t.teema;
+            obj['value'] = t.teema_id;
+            return obj;
+          });
+          this.options = res;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     
     uusiTeksti() {
       this.submitted = false;
       this.teksti = {};
     }
+  },
+  mounted() {
+    this.haeTeemat();
   }
 };
 </script>

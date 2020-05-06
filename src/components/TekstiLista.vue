@@ -2,13 +2,24 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Hae teeman mukaan"
+        <!--<input type="text" class="form-control" placeholder="Hae teeman mukaan"
           v-model="teema"/>
+          -->
+        <select class="form-control" id="select" v-model.number="teema">
+          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
+            {{ option.text }}
+          </option>
+        </select>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button"
             @click="etsiTeemalla"
           >
-            Hae
+            Hae teemalla
+          </button>
+          <button class="btn btn-outline-secondary" type="button"
+            @click="palautaTekstit"
+          >
+            Näytä kaikki
           </button>
         </div>
       </div>
@@ -59,8 +70,11 @@ export default {
   data() {
     return {
       tekstit: [],
+      teemat: [],
+      options: [ { text: 'joulu', value: 1 }],
       currentTeksti: null,
       currentIndex: -1,
+      selected: null,
       teema: ""
     };
   },
@@ -69,14 +83,14 @@ export default {
       TekstiDataService.getAll()
         .then(response => {
           this.tekstit = response.data;
-          console.log(response.data);
+          console.log("Tekstit: ",response.data);
         })
         .catch(e => {
           console.log(e);
         });
     },
 
-    refreshList() {
+    palautaTekstit() {
       this.haeTekstit();
       this.currentTeksti = null;
       this.currentIndex = -1;
@@ -87,7 +101,24 @@ export default {
       this.currentIndex = index;
     },
 
-    
+    haeTeemat() {
+      TekstiDataService.getTeemat()
+        .then(response => {
+          this.teemat = response.data;
+          console.log("Teemat: ", response.data);
+          let res = this.teemat.map(t => {
+            let obj = {};
+            obj['text'] = t.teema;
+            obj['value'] = t.teema_id;
+            return obj;
+          });
+          this.options = res;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
     etsiTeemalla() {
       TekstiDataService.findByTeema(this.teema) // korjaa id:ksi
         .then(response => {
@@ -101,6 +132,7 @@ export default {
   },
   mounted() {
     this.haeTekstit();
+    this.haeTeemat();
   }
 };
 </script>
