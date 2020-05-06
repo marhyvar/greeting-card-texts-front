@@ -67,11 +67,7 @@ export default {
         teksti: this.teksti.teksti,
         teema_id: this.teksti.teema_id
       };
-      console.log('Hei!')
-      console.log({ msg: 'heippa'})
-      console.log('Tallennettava data: ', data);
-      this.submitted = true;
-      /*TekstiDataService.create(data)
+      TekstiDataService.create(data)
         .then(response => {
           this.teksti.id = response.data.id;
           console.log(response.data);
@@ -79,7 +75,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
-        });*/
+        });
     },
 
     haeTeemat() {
