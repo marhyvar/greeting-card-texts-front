@@ -22,7 +22,17 @@
           v-model="teksti.teema_id"
           name="teema_id"
         />
-      </div>
+      </div> 
+      <!--
+      <div class="form-group">
+        <label for="select2">Valitse teema: </label>
+        <select class="form-control" id="select2" v-model.number="teema_id">
+          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+      </div> -->
+      
 
       <button @click="saveTeksti" class="btn btn-success">Tallenna</button>
     </div>
@@ -43,9 +53,12 @@ export default {
     return {
       teksti: {
         id: null,
-        teksti: "",
-        teema_id: ""
+        teksti: "",  
+        teema_id: ""     
       },
+      teema_id: "",
+      teemat: [],
+      options: [ { text: 'joulu', value: 1 }],
       submitted: false
     };
   },

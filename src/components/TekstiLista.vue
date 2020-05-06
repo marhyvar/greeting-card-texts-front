@@ -75,7 +75,6 @@ export default {
       currentTeksti: null,
       currentIndex: -1,
       selected: null,
-      results: null,
       teema: ""
     };
   },
@@ -118,17 +117,6 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
-
-    muodostaOptiot() {
-      let res = this.teemat.map(t => {
-        let array = []
-        array[0] = t.teema
-        array[1] = t.teema_id
-      return array;
-      });
-      this.results = res;
-      console.log('Results: ', res)
     },
 
     etsiTeemalla() {
