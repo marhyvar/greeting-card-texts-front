@@ -14,7 +14,12 @@
           <button class="btn btn-outline-secondary" type="button"
             @click="etsiTeemalla"
           >
-            Hae
+            Hae teemalla
+          </button>
+          <button class="btn btn-outline-secondary" type="button"
+            @click="palautaTekstit"
+          >
+            Näytä kaikki
           </button>
         </div>
       </div>
@@ -86,7 +91,7 @@ export default {
         });
     },
 
-    refreshList() {
+    palautaTekstit() {
       this.haeTekstit();
       this.currentTeksti = null;
       this.currentIndex = -1;
