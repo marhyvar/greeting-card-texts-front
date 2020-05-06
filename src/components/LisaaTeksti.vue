@@ -3,9 +3,9 @@
     <div v-if="!submitted">
       <div class="form-group">
         <label for="teksti">Teksti</label>
-        <input
-          type="text"
+        <textarea
           class="form-control"
+          rows="5"
           id="teksti"
           required
           v-model="teksti.teksti"

@@ -4,7 +4,7 @@
     <form>
       <div class="form-group">
         <label for="teksti">Teksti</label>
-        <input type="text" class="form-control" id="teksti"
+        <textarea class="form-control" rows="5" id="teksti"
           v-model="currentTeksti.teksti"
         />
       </div>
