@@ -21,6 +21,11 @@ export default new Router({
       path: "/lisaa",
       name: "lisaa",
       component: () => import("./components/LisaaTeksti")
+    },
+    {
+      path: "/lisaaTeema",
+      name: "lisaaTeema",
+      component: () => import("./components/LisaaTeema")
     }
   ]
 });
