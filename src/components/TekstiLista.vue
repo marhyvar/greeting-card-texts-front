@@ -1,66 +1,66 @@
 <template>
   <div class="list">
     <div class="row">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-        <select class="form-control" id="select" v-model.number="teema">
-          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
-            {{ option.text }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <button class="btn btn-outline-dark" type="button"
-            @click="etsiTeemalla"
-          >
-            Hae teemalla
-          </button>
-          <button class="btn btn-outline-dark" type="button"
-            @click="palautaTekstit"
-          >
-            Näytä kaikki
-          </button>
+      <div class="col-md-8">
+        <div class="input-group mb-3">
+          <select class="form-control" id="select" v-model.number="teema">
+            <option v-for="option in options" v-bind:value="option.value" :key="option.value">
+              {{ option.text }}
+            </option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-outline-dark" type="button"
+              @click="etsiTeemalla"
+            >
+              Hae teemalla
+            </button>
+            <button class="btn btn-outline-dark" type="button"
+              @click="palautaTekstit"
+            >
+              Näytä kaikki
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </div>
     <div class="row">
-    <div class="col-md-10">
-      <h4>Tekstilista</h4>
-      <ul>
-        
-        <li
-          :class="{ active: index == currentIndex }"
-          v-for="(teksti, index) in tekstit"
-          :key="index"
-          @click="setActiveTeksti(teksti, index)"
-        >
-          {{ teksti.teksti }}
-        </li>
-        
-      </ul>
+      <div class="col-md-2">
+        <div v-if="currentTeksti">
+          <h4>Valittu teksti:</h4>
+          <div>
+            <label><strong>Teksti:</strong></label> {{ currentTeksti.teksti }}
+          </div>
+          <!--<div>
+            <label><strong>Teema_id:</strong></label> {{ currentTeksti.teema_id }}
+          </div> -->
 
-    </div>
-    <div class="col-md-2">
-      <div v-if="currentTeksti">
-        <h4>Valittu teksti:</h4>
-        <div>
-          <label><strong>Teksti:</strong></label> {{ currentTeksti.teksti }}
+          <a class="badge badge-warning"
+            :href="'/tekstit/' + currentTeksti.id"
+          >
+            Muokkaa
+          </a>
         </div>
-        <!--<div>
-          <label><strong>Teema_id:</strong></label> {{ currentTeksti.teema_id }}
-        </div> -->
+        <div v-else>
+          <br />
+          <p>Klikkaa tekstiä...</p>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <h4>Tekstilista</h4>
+        <ul>         
+          <li
+            :class="{ active: index == currentIndex }"
+            v-for="(teksti, index) in tekstit"
+            :key="index"
+            @click="setActiveTeksti(teksti, index)"
+          >
+            {{ teksti.teksti }}
+          </li>
+          
+        </ul>
 
-        <a class="badge badge-warning"
-          :href="'/tekstit/' + currentTeksti.id"
-        >
-          Muokkaa
-        </a>
       </div>
-      <div v-else>
-        <br />
-        <p>Klikkaa tekstiä...</p>
-      </div>
-    </div>
+
     </div>
   </div>
 </template>
