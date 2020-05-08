@@ -28,7 +28,7 @@
         <div v-if="currentTeksti">
           <h4>Valittu teksti:</h4>
           <div>
-            <label><strong>Teksti:</strong></label> {{ currentTeksti.teksti }}
+           {{ currentTeksti.teksti }}
           </div>
           <!--<div>
             <label><strong>Teema_id:</strong></label> {{ currentTeksti.teema_id }}
@@ -149,24 +149,25 @@ export default {
 
 ul {
   list-style-type: none;
-  background: lightcyan;
+  /*background: lightcyan;*/
   padding: 0;
-  border: 6px ridge blue;
+  border: none;
 }
 
 ul li {
   padding: 16px 24px;
-  background: lightcyan;
-  border-bottom: 6px ridge blue;
+  background-image: radial-gradient(ellipse, cyan, lightcyan, white);
+  text-align: center;
+  /*border-bottom: 6px ridge blue;*/
 }
 
-ul li:last-child {
+/*ul li:last-child {
   border-bottom: none
-}
+}*/
 
 .active {
   font-weight: bold;
-  background: lightskyblue;
+  background-image: radial-gradient(circle, skyblue, lightskyblue, white);
 }
 
 </style>
