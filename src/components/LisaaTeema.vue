@@ -27,7 +27,7 @@
 import TekstiDataService from "../services/TekstiDataService";
 
 export default {
-  name: "add-teksti",
+  name: "add-teema",
   data() {
     return {
       teema: {
