@@ -8,6 +8,9 @@
         <li class="nav-item">
           <a href="/lisaa" class="nav-link">Lisää teksti</a>
         </li>
+        <li class="nav-item">
+          <a href="/lisaaTeema" class="nav-link">Lisää teema</a>
+        </li>
       </div>
     </nav>
 
