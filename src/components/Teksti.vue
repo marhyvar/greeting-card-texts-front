@@ -62,7 +62,7 @@ export default {
       TekstiDataService.update(this.currentTeksti.id, this.currentTeksti)
         .then(response => {
           console.log(response.data);
-          this.message = 'Päivitys onnistui!';
+          this.viesti = 'Päivitys onnistui!';
         })
         .catch(e => {
           console.log(e);
