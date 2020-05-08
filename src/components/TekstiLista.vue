@@ -26,16 +26,17 @@
     <div class="row">
     <div class="col-md-10">
       <h4>Tekstilista</h4>
-      <ul class="list-group">
-        <li class="list-group-item"
+      <ul>
+        
+        <li
           :class="{ active: index == currentIndex }"
           v-for="(teksti, index) in tekstit"
           :key="index"
           @click="setActiveTeksti(teksti, index)"
         >
           {{ teksti.teksti }}
-          
         </li>
+        
       </ul>
 
     </div>
@@ -145,4 +146,27 @@ export default {
   /*max-width: 750px;*/
   margin: auto;
 }
+
+ul {
+  list-style-type: none;
+  background: lightcyan;
+  padding: 0;
+  border: 6px ridge blue;
+}
+
+ul li {
+  padding: 16px 24px;
+  background: lightcyan;
+  border-bottom: 6px ridge blue;
+}
+
+ul li:last-child {
+  border-bottom: none
+}
+
+.active {
+  font-weight: bold;
+  background: lightskyblue;
+}
+
 </style>
