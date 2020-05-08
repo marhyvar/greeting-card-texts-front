@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="input-group mb-3">
           <select class="form-control" id="select" v-model.number="teema">
             <option v-for="option in options" v-bind:value="option.value" :key="option.value">
@@ -34,7 +34,7 @@
             <label><strong>Teema_id:</strong></label> {{ currentTeksti.teema_id }}
           </div> -->
 
-          <a class="badge badge-warning"
+          <a class="btn btn-outline-dark btn-sm"
             :href="'/tekstit/' + currentTeksti.id"
           >
             Muokkaa
@@ -46,7 +46,6 @@
         </div>
       </div>
       <div class="col-md-10">
-        <h4>Tekstilista</h4>
         <ul>         
           <li
             :class="{ active: index == currentIndex }"
