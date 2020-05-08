@@ -1,63 +1,62 @@
 <template>
-  <div class="list row">
-    <div class="col-md-8">
-      <div class="input-group mb-3">
-        <!--<input type="text" class="form-control" placeholder="Hae teeman mukaan"
-          v-model="teema"/>
-          -->
-        <select class="form-control" id="select" v-model.number="teema">
-          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
-            {{ option.text }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
-            @click="etsiTeemalla"
-          >
-            Hae teemalla
-          </button>
-          <button class="btn btn-outline-secondary" type="button"
-            @click="palautaTekstit"
-          >
-            Näytä kaikki
-          </button>
+  <div class="nakyma">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-group mb-3">
+          <select class="form-control" id="select" v-model.number="teema">
+            <option v-for="option in options" v-bind:value="option.value" :key="option.value">
+              {{ option.text }}
+            </option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-outline-dark" type="button"
+              @click="etsiTeemalla"
+            >
+              Hae teemalla
+            </button>
+            <button class="btn btn-outline-dark" type="button"
+              @click="palautaTekstit"
+            >
+              Näytä kaikki
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <h4>Tekstilista</h4>
-      <ul class="list-group">
-        <li class="list-group-item"
-          :class="{ active: index == currentIndex }"
-          v-for="(teksti, index) in tekstit"
-          :key="index"
-          @click="setActiveTeksti(teksti, index)"
-        >
-          {{ teksti.teksti }}
-        </li>
-      </ul>
+    <div class="row">
+      <div class="col-md-2">
+        <div v-if="currentTeksti">
+          <h5>Valittu teksti:</h5>
+          <div class="tekstikehys">
+           {{ currentTeksti.teksti.slice(0, 28) + "..." }}
+          </div>
 
-    </div>
-    <div class="col-md-6">
-      <div v-if="currentTeksti">
-        <h4>Teksti</h4>
-        <div>
-          <label><strong>Teksti:</strong></label> {{ currentTeksti.teksti }}
+          <a class="btn btn-outline-dark btn-sm"
+            :href="'/tekstit/' + currentTeksti.id"
+          >
+            Muokkaa
+          </a>
         </div>
-        <div>
-          <label><strong>Teema_id:</strong></label> {{ currentTeksti.teema_id }}
+        <div v-else>
+          <br />
+          <p>Valitse teksti klikkaamalla</p>
         </div>
+      </div>
+      <div class="col-md-10">
+        <ul>         
+          <li
+            :class="{ active: index == currentIndex }"
+            v-for="(teksti, index) in tekstit"
+            :key="index"
+            @click="setActiveTeksti(teksti, index)"
+          >
+            {{ teksti.teksti }}
+          </li>
+          
+        </ul>
 
-        <a class="badge badge-warning"
-          :href="'/tekstit/' + currentTeksti.id"
-        >
-          Muokkaa
-        </a>
       </div>
-      <div v-else>
-        <br />
-        <p>Klikkaa tekstiä...</p>
-      </div>
+
     </div>
   </div>
 </template>
@@ -66,7 +65,7 @@
 import TekstiDataService from "../services/TekstiDataService";
 
 export default {
-  name: "tekstit-lista",
+  name: "teksti-lista",
   data() {
     return {
       tekstit: [],
@@ -138,9 +137,39 @@ export default {
 </script>
 
 <style>
-.list {
-  text-align: left;
-  max-width: 750px;
+.nakyma {
   margin: auto;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  border: none;
+}
+
+ul li {
+  padding: 34px 48px;
+  background-image: radial-gradient(ellipse, #ffffcc, #ffffe6, white);
+  text-align: center;
+}
+
+.active {
+  font-weight: bold;
+  background-image: radial-gradient(circle, #b3b3b3, #cccccc, white);
+}
+
+.btn-sm {
+  margin-bottom: 10px;
+}
+
+.tekstikehys {
+  padding: 10px;
+  margin-bottom: 10px;
+  color: white;
+  background: black;
+}
+
+select {
+  font-family: Arial;
 }
 </style>
