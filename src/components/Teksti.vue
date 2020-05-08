@@ -13,15 +13,23 @@
         <input type="text" class="form-control" id="teema_id"
           v-model="currentTeksti.teema_id"
         />
-      </div>
+      </div> 
+      <!-- <div class="form-group">
+        <label for="select2">Teema: </label>
+        <select class="form-control" id="select2" v-model.number="currentTeksti.teema_id">
+          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+      </div> -->
     </form>
-    <button class="badge badge-danger mr-2"
+    <button class="btn btn-outline-danger"
       @click="deleteTeksti"
     >
       Poista
     </button>
 
-    <button type="submit" class="badge badge-success"
+    <button type="submit" class="btn btn-outline-success"
       @click="updateTeksti"
     >
       Muokkaa
@@ -92,5 +100,9 @@ export default {
 .edit-form {
   max-width: 300px;
   margin: auto;
+}
+
+.btn {
+  margin-right: 15px ;
 }
 </style>

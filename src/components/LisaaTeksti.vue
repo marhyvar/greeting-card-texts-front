@@ -34,12 +34,12 @@
       </div> 
       
 
-      <button @click="saveTeksti" class="btn btn-success">Tallenna</button>
+      <button @click="saveTeksti" class="btn btn-outline-success">Tallenna</button>
     </div>
 
     <div v-else>
       <h4>Tallennus onnistui!</h4>
-      <button class="btn btn-success" @click="uusiTeksti">Lisää</button>
+      <button class="btn btn-outline-success" @click="uusiTeksti">Lisää</button>
     </div>
   </div>
 </template>

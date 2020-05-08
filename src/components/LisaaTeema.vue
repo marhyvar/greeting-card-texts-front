@@ -13,12 +13,12 @@
         />
       </div> 
 
-      <button @click="saveTeema" class="btn btn-success">Tallenna</button>
+      <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
     </div>
 
     <div v-else>
       <h4>Tallennus onnistui!</h4>
-      <button class="btn btn-success" @click="uusiTeema">Lisää</button>
+      <button class="btn btn-outline-success" @click="uusiTeema">Lisää</button>
     </div>
   </div>
 </template>
