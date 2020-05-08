@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="nakyma">
     <div class="row">
       <div class="col-md-6">
         <div class="input-group mb-3">
@@ -26,13 +26,10 @@
     <div class="row">
       <div class="col-md-2">
         <div v-if="currentTeksti">
-          <h4>Valittu teksti:</h4>
-          <div>
-           {{ currentTeksti.teksti }}
+          <h5>Valittu teksti:</h5>
+          <div class="tekstikehys">
+           {{ currentTeksti.teksti.slice(0, 28) + "..." }}
           </div>
-          <!--<div>
-            <label><strong>Teema_id:</strong></label> {{ currentTeksti.teema_id }}
-          </div> -->
 
           <a class="btn btn-outline-dark btn-sm"
             :href="'/tekstit/' + currentTeksti.id"
@@ -42,7 +39,7 @@
         </div>
         <div v-else>
           <br />
-          <p>Klikkaa tekstiä...</p>
+          <p>Valitse teksti klikkaamalla</p>
         </div>
       </div>
       <div class="col-md-10">
@@ -68,7 +65,7 @@
 import TekstiDataService from "../services/TekstiDataService";
 
 export default {
-  name: "tekstit-lista",
+  name: "teksti-lista",
   data() {
     return {
       tekstit: [],
@@ -140,33 +137,39 @@ export default {
 </script>
 
 <style>
-.list {
-  /*text-align: left;*/
-  /*max-width: 750px;*/
+.nakyma {
   margin: auto;
 }
 
 ul {
   list-style-type: none;
-  /*background: lightcyan;*/
   padding: 0;
   border: none;
 }
 
 ul li {
-  padding: 16px 24px;
-  background-image: radial-gradient(ellipse, cyan, lightcyan, white);
+  padding: 34px 48px;
+  background-image: radial-gradient(ellipse, #ffffcc, #ffffe6, white);
   text-align: center;
-  /*border-bottom: 6px ridge blue;*/
 }
-
-/*ul li:last-child {
-  border-bottom: none
-}*/
 
 .active {
   font-weight: bold;
-  background-image: radial-gradient(circle, skyblue, lightskyblue, white);
+  background-image: radial-gradient(circle, #b3b3b3, #cccccc, white);
 }
 
+.btn-sm {
+  margin-bottom: 10px;
+}
+
+.tekstikehys {
+  padding: 10px;
+  margin-bottom: 10px;
+  color: white;
+  background: black;
+}
+
+select {
+  font-family: Arial;
+}
 </style>

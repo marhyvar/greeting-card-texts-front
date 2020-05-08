@@ -3,7 +3,7 @@
     <div v-if="!submitted">
  
       <div class="form-group">
-        <label for="teema">Lisää teema</label>
+        <label for="teema">Uuden teeman nimi: </label>
         <input
           class="form-control"
           id="teema"

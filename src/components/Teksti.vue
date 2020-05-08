@@ -1,27 +1,21 @@
 <template>
   <div v-if="currentTeksti" class="edit-form">
-    <h4>Teksti</h4>
     <form>
       <div class="form-group">
-        <label for="teksti">Teksti</label>
+        <label for="teksti">Muokkaa tekstiä: </label>
         <textarea class="form-control" rows="5" id="teksti"
           v-model="currentTeksti.teksti"
         />
       </div>
-      <div class="form-group">
-        <label for="teema_id">Teema_id</label>
-        <input type="text" class="form-control" id="teema_id"
-          v-model="currentTeksti.teema_id"
-        />
-      </div> 
-      <!-- <div class="form-group">
-        <label for="select2">Teema: </label>
+
+       <div class="form-group">
+        <label for="select2">Vaihda teema: </label>
         <select class="form-control" id="select2" v-model.number="currentTeksti.teema_id">
           <option v-for="option in options" v-bind:value="option.value" :key="option.value">
             {{ option.text }}
           </option>
         </select>
-      </div> -->
+      </div> 
     </form>
     <button class="btn btn-outline-danger"
       @click="deleteTeksti"
@@ -29,7 +23,7 @@
       Poista
     </button>
 
-    <button type="submit" class="btn btn-outline-success"
+    <button type="submit" class="btn btn-outline-dark"
       @click="updateTeksti"
     >
       Muokkaa
@@ -51,6 +45,8 @@ export default {
   data() {
     return {
       currentTeksti: null,
+      teemat: [],
+      options: [ { text: 'joulu', value: 1 }],
       viesti: ''
     };
   },
@@ -86,11 +82,31 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+
+    haeTeemat() {
+      TekstiDataService.getTeemat()
+        .then(response => {
+          this.teemat = response.data;
+          console.log("Teemat: ", response.data);
+          let res = this.teemat.map(t => {
+            let obj = {};
+            obj['text'] = t.teema;
+            obj['value'] = t.teema_id;
+            return obj;
+          });
+          this.options = res;
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   },
+
   mounted() {
     this.viesti = '';
     this.getTeksti(this.$route.params.id);
+    this.haeTeemat();
     console.log('id: ', this.$route.params.id)
   }
 };
@@ -104,5 +120,9 @@ export default {
 
 .btn {
   margin-right: 15px ;
+}
+
+select {
+  font-family: Arial;
 }
 </style>

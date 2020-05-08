@@ -2,7 +2,7 @@
   <div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
-        <label for="teksti">Teksti</label>
+        <label for="teksti">Kirjoita teksti:</label>
         <textarea
           class="form-control"
           rows="5"
@@ -12,18 +12,7 @@
           name="teksti"
         />
       </div>
-      <!--
-      <div class="form-group">
-        <label for="teema_id">Teema-id</label>
-        <input
-          class="form-control"
-          id="teema_id"
-          required
-          v-model="teksti.teema_id"
-          name="teema_id"
-        />
-      </div> 
-      -->
+
       <div class="form-group">
         <label for="select2">Valitse teema: </label>
         <select class="form-control" id="select2" v-model.number="teksti.teema_id">
@@ -111,5 +100,9 @@ export default {
 .submit-form {
   max-width: 300px;
   margin: auto;
+}
+
+select {
+  font-family: Arial;
 }
 </style>
