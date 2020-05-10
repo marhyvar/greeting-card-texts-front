@@ -21,9 +21,14 @@
           </option>
         </select>
       </div> 
-      
-
-      <button @click="saveTeksti" class="btn btn-outline-success">Tallenna</button>
+      <div class="btn-group">
+        <button @click="saveTeksti" type="button" class="btn btn-outline-success">Tallenna</button>
+        <a class="btn btn-outline-secondary"
+          :href="/tekstit/"
+          >
+          Takaisin
+        </a>
+      </div>
     </div>
 
     <div v-else>
@@ -105,4 +110,5 @@ export default {
 select {
   font-family: Arial;
 }
+
 </style>

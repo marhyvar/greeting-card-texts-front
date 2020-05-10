@@ -17,17 +17,24 @@
         </select>
       </div> 
     </form>
-    <button class="btn btn-outline-danger"
-      @click="deleteTeksti"
-    >
-      Poista
-    </button>
+    <div class="btn-group">
+      <button class="btn btn-outline-danger"
+        @click="deleteTeksti"
+      >
+        Poista
+      </button>
 
-    <button type="submit" class="btn btn-outline-dark"
-      @click="updateTeksti"
-    >
-      Muokkaa
-    </button>
+      <button type="submit" class="btn btn-outline-dark"
+        @click="updateTeksti"
+      >
+        Muokkaa
+      </button>
+      <a class="btn btn-outline-secondary"
+        :href="/tekstit/"
+        >
+        Takaisin
+      </a>
+    </div>
     <p>{{ viesti }}</p>
   </div>
 
@@ -66,10 +73,11 @@ export default {
       TekstiDataService.update(this.currentTeksti.id, this.currentTeksti)
         .then(response => {
           console.log(response.data);
-          this.viesti = 'Päivitys onnistui!';
+          this.viesti = 'Muokkaus onnistui!';
         })
         .catch(e => {
           console.log(e);
+          this.viesti = 'Muokkaus ei onnistunut!';
         });
     },
 
@@ -118,11 +126,10 @@ export default {
   margin: auto;
 }
 
-.btn {
-  margin-right: 15px ;
-}
-
 select {
   font-family: Arial;
+}
+p {
+  margin: 15px 0px;
 }
 </style>
