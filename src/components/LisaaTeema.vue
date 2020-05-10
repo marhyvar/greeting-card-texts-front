@@ -12,6 +12,7 @@
           name="teema"
         />
       </div> 
+      <select-valikko :teema="3"></select-valikko>
       <div class="btn-group">
         <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
         <a class="btn btn-outline-secondary"
@@ -21,7 +22,7 @@
           </a>
         </div>
     </div>
-
+    
     <div v-else>
       <h4>Tallennus onnistui!</h4>
       <button class="btn btn-outline-success" @click="uusiTeema">Lisää</button>
@@ -31,9 +32,11 @@
 
 <script>
 import TekstiDataService from "../services/TekstiDataService";
+import SelectValikko from "./SelectValikko"
 
 export default {
   name: "add-teema",
+  components: { SelectValikko },
   data() {
     return {
       teema: {
