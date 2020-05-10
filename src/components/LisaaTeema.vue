@@ -12,8 +12,7 @@
           name="teema"
         />
       </div> 
-      <select-valikko :teema="3" @get-teema="getTeemaId"></select-valikko>
-      <p> Poista tämä p: {{ testi }}</p>
+
       <div class="btn-group">
         <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
         <a class="btn btn-outline-secondary"
@@ -33,19 +32,16 @@
 
 <script>
 import TekstiDataService from "../services/TekstiDataService";
-import SelectValikko from "./SelectValikko"
 
 export default {
-  name: "add-teema",
-  components: { SelectValikko },
+  name: "lisaa-teema",
   data() {
     return {
       teema: {
         teema_id: null,
         teema: ""     
       },
-      submitted: false,
-      testi: "testi" 
+      submitted: false
     };
   },
   methods: {
@@ -67,10 +63,6 @@ export default {
     uusiTeema() {
       this.submitted = false;
       this.teema = {};
-    },
-
-    getTeemaId(id) {
-      this.testi = id;
     }
   }
 };
