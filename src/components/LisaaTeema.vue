@@ -12,7 +12,8 @@
           name="teema"
         />
       </div> 
-      <select-valikko :teema="3"></select-valikko>
+      <select-valikko :teema="3" @get-teema="getTeemaId"></select-valikko>
+      <p> Poista tämä p: {{ testi }}</p>
       <div class="btn-group">
         <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
         <a class="btn btn-outline-secondary"
@@ -41,9 +42,10 @@ export default {
     return {
       teema: {
         teema_id: null,
-        teema: "",      
+        teema: ""     
       },
-      submitted: false
+      submitted: false,
+      testi: "testi" 
     };
   },
   methods: {
@@ -65,6 +67,10 @@ export default {
     uusiTeema() {
       this.submitted = false;
       this.teema = {};
+    },
+
+    getTeemaId(id) {
+      this.testi = id;
     }
   }
 };

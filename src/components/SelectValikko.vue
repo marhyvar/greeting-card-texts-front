@@ -45,7 +45,8 @@ export default {
         });
     },
     onChange(event) {
-      this.tulos = event.target.value;
+      //this.tulos = event.target.value;
+      this.$emit('get-teema', event.target.value)
     }
   },
 
