@@ -12,8 +12,14 @@
           name="teema"
         />
       </div> 
-
-      <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
+      <div class="btn-group">
+        <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
+        <a class="btn btn-outline-secondary"
+            :href="/tekstit/"
+            >
+            Takaisin
+          </a>
+        </div>
     </div>
 
     <div v-else>
