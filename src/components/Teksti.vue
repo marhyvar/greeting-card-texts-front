@@ -10,11 +10,12 @@
 
        <div class="form-group">
         <label for="select2">Vaihda teema: </label>
-        <select class="form-control" id="select2" v-model.number="currentTeksti.teema_id">
+        <select-valikko :teema="currentTeksti.teema_id" @get-teema="getTeemaId"></select-valikko>
+        <!--<select class="form-control" id="select2" v-model.number="currentTeksti.teema_id">
           <option v-for="option in options" v-bind:value="option.value" :key="option.value">
             {{ option.text }}
           </option>
-        </select>
+        </select> -->
       </div> 
     </form>
     <div class="btn-group">
@@ -46,9 +47,11 @@
 
 <script>
 import TekstiDataService from "../services/TekstiDataService";
+import SelectValikko from "./SelectValikko"
 
 export default {
   name: "teksti",
+  components: { SelectValikko },
   data() {
     return {
       currentTeksti: null,
@@ -92,29 +95,14 @@ export default {
         });
     },
 
-    haeTeemat() {
-      TekstiDataService.getTeemat()
-        .then(response => {
-          this.teemat = response.data;
-          console.log("Teemat: ", response.data);
-          let res = this.teemat.map(t => {
-            let obj = {};
-            obj['text'] = t.teema;
-            obj['value'] = t.teema_id;
-            return obj;
-          });
-          this.options = res;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
+    getTeemaId(id) {
+      this.currentTeksti.teema_id = parseInt(id);
+    },
   },
 
   mounted() {
     this.viesti = '';
     this.getTeksti(this.$route.params.id);
-    this.haeTeemat();
     console.log('id: ', this.$route.params.id)
   }
 };
@@ -126,9 +114,6 @@ export default {
   margin: auto;
 }
 
-select {
-  font-family: Arial;
-}
 p {
   margin: 15px 0px;
 }

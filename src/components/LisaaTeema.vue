@@ -12,6 +12,7 @@
           name="teema"
         />
       </div> 
+
       <div class="btn-group">
         <button @click="saveTeema" class="btn btn-outline-success">Tallenna</button>
         <a class="btn btn-outline-secondary"
@@ -21,7 +22,7 @@
           </a>
         </div>
     </div>
-
+    
     <div v-else>
       <h4>Tallennus onnistui!</h4>
       <button class="btn btn-outline-success" @click="uusiTeema">Lisää</button>
@@ -33,12 +34,12 @@
 import TekstiDataService from "../services/TekstiDataService";
 
 export default {
-  name: "add-teema",
+  name: "lisaa-teema",
   data() {
     return {
       teema: {
         teema_id: null,
-        teema: "",      
+        teema: ""     
       },
       submitted: false
     };

@@ -3,11 +3,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="input-group mb-3">
-          <select class="form-control" id="select" v-model.number="teema">
-            <option v-for="option in options" v-bind:value="option.value" :key="option.value">
-              {{ option.text }}
-            </option>
-          </select>
+          <select-valikko @get-teema="getTeemaId"></select-valikko>
           <div class="input-group-append">
             <button class="btn btn-outline-dark" type="button"
               @click="etsiTeemalla"
@@ -63,17 +59,16 @@
 
 <script>
 import TekstiDataService from "../services/TekstiDataService";
+import SelectValikko from "./SelectValikko"
 
 export default {
   name: "teksti-lista",
+  components: { SelectValikko },
   data() {
     return {
       tekstit: [],
-      teemat: [],
-      options: [ { text: 'joulu', value: 1 }],
       currentTeksti: null,
       currentIndex: -1,
-      selected: null,
       teema: ""
     };
   },
@@ -82,7 +77,7 @@ export default {
       TekstiDataService.getAll()
         .then(response => {
           this.tekstit = response.data;
-          console.log("Tekstit: ",response.data);
+          console.log("Tekstit: ", response.data);
         })
         .catch(e => {
           console.log(e);
@@ -100,26 +95,12 @@ export default {
       this.currentIndex = index;
     },
 
-    haeTeemat() {
-      TekstiDataService.getTeemat()
-        .then(response => {
-          this.teemat = response.data;
-          console.log("Teemat: ", response.data);
-          let res = this.teemat.map(t => {
-            let obj = {};
-            obj['text'] = t.teema;
-            obj['value'] = t.teema_id;
-            return obj;
-          });
-          this.options = res;
-        })
-        .catch(e => {
-          console.log(e);
-        });
+    getTeemaId(id) {
+      this.teema = id;
     },
 
     etsiTeemalla() {
-      TekstiDataService.findByTeema(this.teema) // korjaa id:ksi
+      TekstiDataService.findByTeema(this.teema)
         .then(response => {
           this.tekstit = response.data;
           console.log(response.data);
@@ -131,12 +112,12 @@ export default {
   },
   mounted() {
     this.haeTekstit();
-    this.haeTeemat();
   }
 };
 </script>
 
 <style>
+
 .nakyma {
   margin: auto;
 }
@@ -169,7 +150,4 @@ ul li {
   background: black;
 }
 
-select {
-  font-family: Arial;
-}
 </style>
