@@ -15,11 +15,13 @@
 
       <div class="form-group">
         <label for="select2">Valitse teema: </label>
-        <select class="form-control" id="select2" v-model.number="teksti.teema_id">
+        <select-valikko @get-teema="getTeemaId"></select-valikko>
+        <!--<select class="form-control" id="select2" v-model.number="teksti.teema_id">
           <option v-for="option in options" v-bind:value="option.value" :key="option.value">
             {{ option.text }}
           </option>
         </select>
+        -->
       </div> 
       <div class="btn-group">
         <button @click="saveTeksti" type="button" class="btn btn-outline-success">Tallenna</button>
@@ -40,9 +42,11 @@
 
 <script>
 import TekstiDataService from "../services/TekstiDataService";
+import SelectValikko from "./SelectValikko"
 
 export default {
   name: "add-teksti",
+  components: { SelectValikko },
   data() {
     return {
       teksti: {
@@ -50,8 +54,8 @@ export default {
         teksti: "",  
         teema_id: ""     
       },
-      teemat: [],
-      options: [ { text: 'joulu', value: 1 }],
+      //teemat: [],
+      //options: [ { text: 'joulu', value: 1 }],
       submitted: false
     };
   },
@@ -72,7 +76,11 @@ export default {
         });
     },
 
-    haeTeemat() {
+
+    getTeemaId(id) {
+      this.teksti.teema_id = id;
+    },
+    /*haeTeemat() {
       TekstiDataService.getTeemat()
         .then(response => {
           this.teemat = response.data;
@@ -88,15 +96,12 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
+    },*/
     
     uusiTeksti() {
       this.submitted = false;
       this.teksti = {};
     }
-  },
-  mounted() {
-    this.haeTeemat();
   }
 };
 </script>
@@ -105,10 +110,6 @@ export default {
 .submit-form {
   max-width: 300px;
   margin: auto;
-}
-
-select {
-  font-family: Arial;
 }
 
 </style>

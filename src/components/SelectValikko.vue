@@ -1,11 +1,11 @@
 <template>
-  <div>
+
     <select class="form-control" @change="onChange($event) " v-model.number="tulos">
         <option v-for="option in options" v-bind:value="option.value" :key="option.value">
             {{ option.text }}
         </option>
     </select>
-  </div>
+
 </template>
 
 <script>
