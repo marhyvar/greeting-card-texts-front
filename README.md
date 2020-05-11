@@ -38,76 +38,53 @@ Käyttöliittymän päänäkymässä esitetään kaikki tekstit, joita voi suoda
 
 ## Tekninen kuvaus
 
-Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset
-ratkaisut, esim.
+![tekninen kuvaus](kuvat/tekn_kuvaus.png)
 
--   Missä mikäkin järjestelmän komponentti ajetaan (tietokone, palvelinohjelma)
-    ja komponenttien väliset yhteydet (vaikkapa tähän tyyliin:
-    https://security.ufl.edu/it-workers/risk-assessment/creating-an-information-systemdata-flow-diagram/)
--   Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
--   Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää
-    UML-sekvenssikaavioilla.
--   Toteutuksen yleisiä ratkaisuja, esim. turvallisuus.
+Palvelin on toteutettu Node.js Express-sovelluskehyksellä, tietokantana toimii PostgreSQL ja asiakaskäyttöliittymä on toteutettu Vue.js-sovelluskehyksellä.
 
-Tämän lisäksi
+### Rajapinnan kuvaus
 
--   ohjelmakoodin tulee olla kommentoitua
--   luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa
-    johdonmukaisia nimeämiskäytäntöjä
--   ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta
-    vältytään
+> Metodi | Url | Toiminto
+> ------ | ------ | ------
+> GET | api/v1/teemat | Hakee kaikki teemat
+> GET | api/v1/teemat/:id/tekstit |  Hakee samaan teemaan kuuluvat tekstit
+> POST | api/v1/teemat | Lisää uuden teeman
+> GET | api/v1/tekstit | Hakee kaikki tekstit
+> GET | api/v1/tekstit/:id | Hakee tekstin id:llä
+> POST | api/v1/tekstit | Lisää uuden tekstin
+> PUT | api/v1/tekstit/:id | Muokkaa tekstiä
+> DELETE | api/v1/tekstit/:id | Poistaa tekstin
 
-## Testaus
+[Linkki palvelinrepositoryyn](https://github.com/marhyvar/greeting-card-texts-api)
 
-Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan
-testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa.
-Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan
-erillisiin dokumentteihin.
-
-Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu.
 
 ## Asennustiedot
 
-Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta:
-
--   järjestelmän kehitysympäristö: miten järjestelmän kehitysympäristön saisi
-    rakennettua johonkin toiseen koneeseen
-
--   järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi
-    asennettua johonkin uuteen ympäristöön.
-
-Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja
-käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta,
-käyttäjätunnus, salasana, tietokannan luonti yms.).
-
-## Käynnistys- ja käyttöohje
-
-Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä
-mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän
-käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä.
-
-Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat
-järjestelmän pariin !
-
-## Project setup
+Järjestelmän kehitysympäristö: lataa ja asenna [Git](https://git-scm.com/downloads), [VisualStudioCode](https://code.visualstudio.com/), [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), [Node](https://nodejs.org/en/download/) ja tämän jälkeen [VueCLI](https://cli.vuejs.org/):
+```
+npm install -g @vue/cli
+```
+Kloonaa projekti:
+```
+git clone https://github.com/marhyvar/greeting-card-texts-front.git
+```
+```
+cd greeting-card-texts-front
+```
+Asenna riippuvuudet:
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+Käynnistä sovellus:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Käynnistys- ja käyttöohje
 
-### Lints and fixes files
+Sovelluksen käynnistys:
 ```
-npm run lint
+npm run serve
 ```
+Avaa selaimessa http://localhost:8080
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
