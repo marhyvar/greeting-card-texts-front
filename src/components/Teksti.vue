@@ -1,21 +1,16 @@
 <template>
-  <div v-if="currentTeksti" class="edit-form">
+  <div v-if="valittuTeksti" class="edit-form">
     <form>
       <div class="form-group">
         <label for="teksti">Muokkaa tekstiä: </label>
         <textarea class="form-control" rows="5" id="teksti"
-          v-model="currentTeksti.teksti"
+          v-model="valittuTeksti.teksti"
         />
       </div>
 
        <div class="form-group">
         <label for="select2">Vaihda teema: </label>
-        <select-valikko :teema="currentTeksti.teema_id" @get-teema="getTeemaId"></select-valikko>
-        <!--<select class="form-control" id="select2" v-model.number="currentTeksti.teema_id">
-          <option v-for="option in options" v-bind:value="option.value" :key="option.value">
-            {{ option.text }}
-          </option>
-        </select> -->
+        <select-valikko :teema="valittuTeksti.teema_id" @get-teema="getTeemaId"></select-valikko>
       </div> 
     </form>
     <div class="btn-group">
@@ -50,30 +45,32 @@ import TekstiDataService from "../services/TekstiDataService";
 import SelectValikko from "./SelectValikko"
 
 export default {
+  //komponentti, jossa on tekstin muokkaamiseen ja poistamiseen liittyvät toiminnallisuudet
   name: "teksti",
   components: { SelectValikko },
   data() {
     return {
-      currentTeksti: null,
+      valittuTeksti: null,
       teemat: [],
       options: [ { text: 'joulu', value: 1 }],
       viesti: ''
     };
   },
   methods: {
+    //hakee tekstin id:n mukaisesti 
     getTeksti(id) {
       TekstiDataService.get(id)
         .then(response => {
-          this.currentTeksti = response.data[0];
+          this.valittuTeksti = response.data[0];
           console.log('teksti: ', response.data[0]);
         })
         .catch(e => {
           console.log(e);
         });
     },
-
+    //päivittää valitun tekstin
     updateTeksti() {
-      TekstiDataService.update(this.currentTeksti.id, this.currentTeksti)
+      TekstiDataService.update(this.valittuTeksti.id, this.valittuTeksti)
         .then(response => {
           console.log(response.data);
           this.viesti = 'Muokkaus onnistui!';
@@ -83,9 +80,9 @@ export default {
           this.viesti = 'Muokkaus ei onnistunut!';
         });
     },
-
+    //poistaa valitun tekstin
     deleteTeksti() {
-      TekstiDataService.delete(this.currentTeksti.id)
+      TekstiDataService.delete(this.valittuTeksti.id)
         .then(response => {
           console.log(response.data);
           this.$router.push({ name: "tekstit" });
@@ -94,12 +91,12 @@ export default {
           console.log(e);
         });
     },
-
+    //asettaa valitun tekstin teema_id:n valikkovalinnan mukaan
     getTeemaId(id) {
-      this.currentTeksti.teema_id = parseInt(id);
+      this.valittuTeksti.teema_id = parseInt(id);
     },
   },
-
+  //näkyman latautuessa viesti asetataan tyhjäksi ja haetaan teksti id-parametrin mukaan
   mounted() {
     this.viesti = '';
     this.getTeksti(this.$route.params.id);
@@ -109,6 +106,7 @@ export default {
 </script>
 
 <style>
+
 .edit-form {
   max-width: 300px;
   margin: auto;
@@ -117,4 +115,5 @@ export default {
 p {
   margin: 15px 0px;
 }
+
 </style>

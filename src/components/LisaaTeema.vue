@@ -34,6 +34,7 @@
 import TekstiDataService from "../services/TekstiDataService";
 
 export default {
+  //komponentti uusien teemojen lisäystä varten
   name: "lisaa-teema",
   data() {
     return {
@@ -45,6 +46,7 @@ export default {
     };
   },
   methods: {
+    //tallentaa uuden teeman
     saveTeema() {
       var data = {
         teema: this.teema.teema
@@ -59,7 +61,7 @@ export default {
           console.log(e);
         });
     },
-    
+    //lomakkeen käsittelyn jälkeisessä näkymässä avaa uuden tyhjän lomakkeen
     uusiTeema() {
       this.submitted = false;
       this.teema = {};
@@ -69,9 +71,11 @@ export default {
 </script>
 
 <style>
+
 .submit-form {
   max-width: 300px;
   margin: auto;
 }
+
 </style>
 

@@ -39,7 +39,8 @@ import TekstiDataService from "../services/TekstiDataService";
 import SelectValikko from "./SelectValikko"
 
 export default {
-  name: "add-teksti",
+  //komponentti uusien tekstien lisäystä varten
+  name: "lisaa-teksti",
   components: { SelectValikko },
   data() {
     return {
@@ -52,6 +53,7 @@ export default {
     };
   },
   methods: {
+    //tallentaa uuden tekstin
     saveTeksti() {
       var data = {
         teksti: this.teksti.teksti,
@@ -67,12 +69,11 @@ export default {
           console.log(e);
         });
     },
-
-
+    //asettaa teema_id:n select-valikkovalinnan mukaan
     getTeemaId(id) {
       this.teksti.teema_id = id;
     },
-    
+    //lomakkeen käsittelyn jälkeisessä näkymässä avaa uuden tyhjän lomakkeen
     uusiTeksti() {
       this.submitted = false;
       this.teksti = {};

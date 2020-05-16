@@ -27,6 +27,7 @@ export default {
     };
   },
   methods: {
+    //hakee teemat palvelimelta ja muokkaa tuloksen valikkoa varten
     haeTeemat() {
       TekstiDataService.getTeemat()
         .then(response => {
@@ -44,12 +45,12 @@ export default {
           console.log(e);
         });
     },
+    //välittää tiedon ylemmälle komponentille valikon arvon muutoksesta
     onChange(event) {
-      //this.tulos = event.target.value;
       this.$emit('get-teema', event.target.value)
     }
   },
-
+  //näkymän latautuessa haetaan teemat ja asetetaan mahdollinen valittu teema
   mounted() {
     this.haeTeemat();
     this.tulos = this.teema;
@@ -59,7 +60,9 @@ export default {
 </script>
 
 <style scoped>
+
   select {
     font-family: Arial;
   }
+  
 </style>
