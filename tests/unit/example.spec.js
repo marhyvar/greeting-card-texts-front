@@ -1,12 +1,14 @@
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import SelectValikko from '@/components/SelectValikko.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe('SelectValikko.vue', () => {
+  it('asettaa ja nayttaa datan oikein propsin mukaan', () => {
+    const teema = 1
+    const wrapper = shallowMount(SelectValikko, {
+      propsData: { teema }
     })
-    expect(wrapper.text()).toMatch(msg)
+    const option1 = wrapper.findAll('option').at(0)
+    expect(option1.text()).toBe('joulu')
+    expect(wrapper.vm.$data.tulos).toBe(1)
   })
 })
