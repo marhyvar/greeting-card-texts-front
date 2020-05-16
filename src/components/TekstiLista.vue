@@ -38,6 +38,7 @@
           <p>Valitse teksti klikkaamalla</p>
         </div>
       </div>
+
       <div class="col-md-10">
         <ul>         
           <li
@@ -47,10 +48,9 @@
             @click="setActiveTeksti(teksti, index)"
           >
             {{ teksti.teksti }}
-          </li>
-          
+          </li>         
         </ul>
-
+        <span>{{ viesti }}</span> 
       </div>
 
     </div>
@@ -67,6 +67,7 @@ export default {
   components: { SelectValikko },
   data() {
     return {
+      viesti:'',
       tekstit: [],
       valittuTeksti: null,
       valittuIndeksi: -1,
@@ -90,6 +91,7 @@ export default {
       this.haeTekstit();
       this.valittuTeksti = null;
       this.valittuIndeksi = -1;
+      this.viesti = '';
     },
     //asettaa tekstin aktiiviseksi (muokkausta varten)
     setActiveTeksti(teksti, index) {
@@ -102,10 +104,14 @@ export default {
     },
     //hakee samaan teemaan kuuluvat tekstit
     etsiTeemalla() {
+      this.viesti = '';
       TekstiDataService.findByTeema(this.teema)
         .then(response => {
           this.tekstit = response.data;
           console.log(response.data);
+          if (response.data.length < 1) {
+            this.viesti = "Tekstejä ei löytynyt valitulla teemalla!";
+          }
         })
         .catch(e => {
           console.log(e);
