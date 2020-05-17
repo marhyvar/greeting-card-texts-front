@@ -25,9 +25,14 @@ describe('TekstiLista.vue', () => {
     })
 
     it('renderoi listan oikein', async () => {
-        await wrapper.setData({ tekstit: [{id: 3,teksti: "On vain hiljaisuus ja sanaton suru.", teema_id: 2},
-        {id: 4,teksti: "Tää hiljaisuus sulle kantakoon sen, osanottoni suurimman lämpöisen.", teema_id: 2}]})
+        await wrapper.setData({ tekstit: [{id: 3, teksti: "On vain hiljaisuus ja sanaton suru.", teema_id: 2},
+        {id: 4, teksti: "Tää hiljaisuus sulle kantakoon sen, osanottoni suurimman lämpöisen.", teema_id: 2}]})
         expect(wrapper.findAll('li').at(0).text()).toBe('On vain hiljaisuus ja sanaton suru.')
         expect(wrapper.findAll('li').at(1).text()).toBe('Tää hiljaisuus sulle kantakoon sen, osanottoni suurimman lämpöisen.')
     })
+
+    it('vaihtaa teemaa kun get-teema emittoidaan', async () => {
+        await wrapper.find(SelectValikko).vm.$emit('get-teema', 1)
+        expect(wrapper.vm.$data.teema).toBe(1)
+    })    
   })
