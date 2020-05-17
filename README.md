@@ -60,6 +60,13 @@ Palvelin on toteutettu Node.js Express-sovelluskehyksellä, tietokantana toimii 
 [Linkki palvelinrepositoryyn](https://github.com/marhyvar/greeting-card-texts-api)
 
 
+## Testaus
+
+Vue-sovelluksen komponentit on testattu yksikkötestein [Vue Test Utils-kirjaston](https://vue-test-utils.vuejs.org/) avulla. Sovelluksen testit ajetaan komennolla:
+```
+npm run test:unit
+```
+
 ## Asennustiedot
 
 ### Järjestelmän kehitysympäristö 
@@ -147,4 +154,6 @@ Avaa selaimessa http://localhost:8080
 [Deploying your Vue apps to Heroku -the right way!](https://medium.com/binarcode/deploying-vue-apps-to-heroku-the-right-way-26b11c1ae5cd)
 
 [Deploy Vue app on Heroku](https://www.codementor.io/@ravianand1988/easily-4-steps-to-continuous-delivery-auto-deploy-vue-js-app-on-heroku-xljk977pq)
+
+[Vue Test Utils](https://vue-test-utils.vuejs.org/)
 
